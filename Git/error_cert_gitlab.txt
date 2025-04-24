@@ -1,0 +1,9 @@
+git config --global http.sslverify false
+
+
+Login or switch to jenkins user; for switching run this command on terminal:
+
+su - jenkins
+And then run
+
+git config --global http.sslVerify false

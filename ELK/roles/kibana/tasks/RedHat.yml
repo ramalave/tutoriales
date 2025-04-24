@@ -1,0 +1,34 @@
+---
+# Tasks for installing Kibana for Centos host
+
+# Tasks for include de package kibana in the yum respos directory
+- name: Add elastic repo
+  yum_repository:
+    name: elastic-7.x
+    description: Elastic repository for 7.x packages
+    baseurl: https://artifacts.elastic.co/packages/7.x/yum
+    gpgcheck: yes
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+# Install
+- name: Installing last version Kibana
+  yum:
+    name: kibana
+    state: latest
+
+# Configure the service with a default file or use one that de user provided in path_config
+- name: Configuring Kibana
+  template:
+    src: "{{ path_config }}"
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: root
+    mode: 0644
+
+# Configure the service with systemd
+- name: Service Kibana enabled, unmasked, started
+  systemd: 
+    name: kibana
+    enabled: yes
+    masked: no
+    state: started

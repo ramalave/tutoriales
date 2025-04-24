@@ -1,0 +1,3 @@
+# Liberar SWAP en linux
+
+swapoff -a && swapon -a

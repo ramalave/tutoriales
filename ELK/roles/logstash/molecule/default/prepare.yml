@@ -1,0 +1,5 @@
+---
+- name: Prepare
+  hosts: logstash
+  roles:
+    - role: elasticsearch

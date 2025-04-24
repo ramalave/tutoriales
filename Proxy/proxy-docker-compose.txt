@@ -1,0 +1,8 @@
+# Editamos el archivo docker-compose.yml y agregamos, esta funcionalidad permite darle internet a los contenedores por proxy
+
+volumes:
+      - /etc/apt/apt.conf.d/90curtin-aptproxy:/etc/apt/apt.conf.d/90curtin-aptproxy
+      
+# Luego guardamos en el archivo de configuracion de docker-compose.yml y reiniciamos el docker
+
+docker-compose down && sleep 7 && docker-compose up -d

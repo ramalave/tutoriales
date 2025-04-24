@@ -1,0 +1,5 @@
+- hosts: curator
+  become: true
+  gather_facts: true
+  roles:
+    - { role: curator}

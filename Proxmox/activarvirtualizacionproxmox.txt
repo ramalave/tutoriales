@@ -1,0 +1,24 @@
+# Activar virtualizacion en proxmox
+
+AMD
+cat /sys/module/kvm_amd/parameters/nested
+
+INTEL
+cat /sys/module/kvm_intel/parameters/nested
+
+
+En un host AMD Proxmox, ejecute el siguiente comando:
+echo "options kvm-amd nested=1" > /etc/modprobe.d/kvm-amd.conf
+
+INTEL
+echo "options kvm-intel nested=Y" > /etc/modprobe.d/kvm-intel.conf
+
+Probar modulo si esta instalado la virtualizacion:
+
+INTEL
+modprobe -r kvm_intel
+modprobe kvm_intel
+
+AMD
+modprobe -r kvm_amd
+modprobe kvm_amd

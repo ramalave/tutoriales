@@ -1,0 +1,12 @@
+# Editamos el archivo de configuracion para setear el proxy
+
+nano /etc/apt/apt.conf.d/76pveproxy
+
+# Agregamos las siguientes líneas:
+
+Acquire::http::Proxy "http://172.10.20.23:8080/";
+Acquire::https::Proxy "http://172.10.20.23:8080/";
+
+
+
+

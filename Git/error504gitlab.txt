@@ -1,0 +1,8 @@
+# Error al realizar un git pull
+
+$ git pull origin master
+fatal: unable to access 'http://bbucket.server.xxx/scm/project/repo.git/': The requested URL returned error: 504
+
+# Solución:
+
+$ git config --global http.proxy ""

@@ -1,0 +1,19 @@
+services:
+  registry:
+    image: registry:latest
+    container_name: registry
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - 5000:5000
+    restart: always
+    volumes:
+      - /etc/docker/registry:/etc/docker/registry
+      - /certs:/certs
+      - /var/lib/registry:/var/lib/registry
+    dns:
+      - 172.10.20.1
+      - 172.10.21.1

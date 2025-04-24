@@ -1,0 +1,135 @@
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=server sh -
+
+cd /usr/local/lib/systemd/system/
+
+nano /usr/local/lib/systemd/system/rke2-server.env
+http_proxy="http://172.10.20.23:8080/"
+https_proxy="http://172.10.20.23:8080/"
+no_proxy="no_proxy="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,cattle-system.svc,.svc,rancher.ramalave.com.ar,.ramalave.com.ar""
+
+nano /usr/local/lib/systemd/system/rke2-agent.env
+http_proxy="http://172.10.20.23:8080/"
+https_proxy="http://172.10.20.23:8080/"
+no_proxy="no_proxy="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,cattle-system.svc,.svc,rancher.ramalave.com.ar,.ramalave.com.ar""
+
+systemctl enable --now rke2-server.service
+
+systemctl restart rke2-server
+
+systemctl status rke2-server
+
+cat /var/lib/rancher/rke2/server/node-token
+K10c3897964178a20ccf5a40aba77017d37205da9d2c4a8a05a8b4d7a4964b1029c::server:efddce66bd4d514ab670bf4b068ee242
+K10f386ced6e55b34350f2ea44adab14195f2e80206960cd50b16689d709e52d794::server:8e33fb250fc27eab407e93cb3e14202d
+
+export RANCHER1_IP=172.10.23.4
+export TOKEN=K10f386ced6e55b34350f2ea44adab14195f2e80206960cd50b16689d709e52d794::server:8e33fb250fc27eab407e93cb3e14202d
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=agent sh -
+mkdir -p /etc/rancher/rke2/
+echo "server: https://$RANCHER1_IP:9345" > /etc/rancher/rke2/config.yaml
+echo "token: $TOKEN" >> /etc/rancher/rke2/config.yaml
+
+export RANCHER1_IP=172.10.23.4
+export TOKEN=K10072f6934038113a0d10be83b6cbef8f70053a1a4136f2667e4046f18fa1cffde::server:c520284d4d691d03345ee6c4a3caf7ac
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE=agent sh -
+mkdir -p /etc/rancher/rke2/
+echo "server: https://$RANCHER1_IP:9345" > /etc/rancher/rke2/config.yaml
+echo "token: $TOKEN" >> /etc/rancher/rke2/config.yaml
+
+nano /usr/local/lib/systemd/system/rke2-agent.env
+http_proxy="http://172.10.20.23:8080/"
+https_proxy="http://172.10.20.23:8080/"
+no_proxy="no_proxy="localhost,127.0.0.1,0.0.0.0,10.0.0.0/8,cattle-system.svc,.svc,rancher.ramalave.com.ar,.ramalave.com.ar"
+
+systemctl enable --now rke2-agent.service
+
+systemctl restart rke2-agent.service
+
+systemctl status rke2-agent.service
+
+curl -#L https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+
+kubectl create namespace cattle-system
+
+kubectl -n cattle-system create secret tls tls-rancher-ingress   --cert=/ssl/star_ramalave_com_ar.crt   --key=/ssl/star_ramalave_com_ar.key   --dry-run=client --save-config -o yaml | kubectl apply -f -
+
+helm install rancher rancher-stable/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.ramalave.com.ar \
+  --set bootstrapPassword=Hello2025 \
+  --set ingress.tls.source=secret \
+  --set privateCA=true
+
+k -n cattle-system rollout status deploy/rancher
+
+k -n cattle-system get deploy rancher
+
+
+kubectl -n cattle-system create secret tls tls-rancher-ingress \
+--cert=/ssl/star_ramalave_com_ar.crt \
+--key=/ssl/star_ramalave_com_ar.key
+
+Actualizacion del certificado o wildcard del rancher con el dominio ramalave.com.ar
+Debes subir el certificado en la ruta del rancher en /ssl
+ajustar el path del crt & key y luego correr el siguiente comando:
+
+Update an existing tls-rancher-ingress secret:
+
+kubectl -n cattle-system create secret tls tls-rancher-ingress \
+  --cert=tls.crt \
+  --key=tls.key \
+  --dry-run=client --save-config -o yaml | kubectl apply -f -
+
+##################  U P G R A D E   R A N C H E R  ###################
+
+helm repo update
+helm get values rancher -n cattle-system
+helm repo list
+helm get values rancher -n cattle-system -o yaml > values.yaml
+helm upgrade rancher rancher-stable/rancher \
+  --namespace cattle-system \
+  -f values.yaml \
+  --version=2.8.5
+
+Release "rancher" has been upgraded. Happy Helming!
+NAME: rancher
+LAST DEPLOYED: Wed Oct 23 10:40:08 2024
+NAMESPACE: cattle-system
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+NOTES:
+Rancher Server has been installed.
+
+NOTE: Rancher may take several minutes to fully initialize. Please standby while Certificates are being issued, Containers are started and the Ingress rule comes up.
+
+Check out our docs at https://rancher.com/docs/
+
+If you provided your own bootstrap password during installation, browse to https://rancher.ramalave.com.ar to get started.
+
+If this is the first time you installed Rancher, get started by running this command and clicking the URL it generates:
+
+```
+echo https://rancher.ramalave.com.ar/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
+```
+
+To get just the bootstrap password on its own, run:
+
+```
+kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{ "\n" }}'
+
+###################################################################
+
+
+
+
+
+
+
+
+
+
+
+

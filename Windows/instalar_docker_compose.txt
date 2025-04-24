@@ -1,0 +1,17 @@
+Paso 1. Iniciar PowerShell
+Primero, abre PowerShell como administrador. 
+
+Paso 2. Configurar el protocolo de seguridad TLS
+GitHub requiere TLS1.2 como protocolo de seguridad predeterminado. Ejecuta el siguiente comando en Windows PowerShell:
+
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+Paso 3. Descargar e instalar Docker Compose
+Descarga la última versión de Compose (v2.17.2) desde GitHub:
+
+Start-BitsTransfer -Source "https://github.com/docker/compose/releases/download/v2.31.0/docker-compose-Windows-x86_64.exe" -Destination C:\Windows\System32\docker-compose.exe
+
+Paso 4. Probar Docker Compose
+Comprueba si Docker Compose se ha instalado correctamente, para ellos, consulta tu versión actual de Compose:
+
+docker-compose --version

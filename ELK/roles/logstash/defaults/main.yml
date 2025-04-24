@@ -1,0 +1,8 @@
+# Logstash config file
+path_config: templates/logstash.yml
+
+# File with all define pipelines
+path_pipelines_config: ''
+
+# list of pipelines
+pipelines: []

@@ -1,0 +1,17 @@
+# Permite actualizar el listado de paquetes de Ubuntu, luego hacer upgrades a los paquetes para actualizar,
+# ademas remueve los paquetes huerfanos o obsoletos para luego limpiar los archivos descargados en la
+# instalacióm finalizando reiniciando el equipo para tomar los nuevos cambios.
+
+apt update && apt dist-upgrade -y && apt autoremove -y && apt autoclean && reboot
+
+# Instala un serie de paquete basicos despues de instalar Ubuntu
+
+apt install build-essential net-tools vim htop tmux ftp git telnet ethtool mc nmap dstat curl lsb-release dnsutils zip -y
+
+# Instala el agente qemu-guest-agent que conecta y sincroniza el uso de la vm con el Proxmox
+
+apt install qemu-guest-agent
+
+systemctl enable --now qemu-guest-agent
+
+systemctl status qemu-guest-agent

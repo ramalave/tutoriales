@@ -1,0 +1,9 @@
+# Subir cambios del repositorio local al repositorio de gitlab
+git config --global user.name "usrgitlab"
+git config --global user.email "usrgitlab@bancointerfinanzas.com.ar"
+git init
+git status
+git add .
+git commit -m "Comentario del commit a subir"
+git push
+git tag -a v1.4 -m 'mi version 1.4'

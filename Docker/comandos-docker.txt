@@ -1,0 +1,8 @@
+# Visualiza la direccion ip de la red docker
+docker inspect <container id> | grep "IPAddress"
+
+# Copiar un archivo que se encuentra en el contenedor hacia la maquina host
+docker cp src_path container:dest_path
+
+# Reiniciar un contenedor especifico en docker compose
+docker-compose restart servicename

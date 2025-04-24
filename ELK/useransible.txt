@@ -1,0 +1,30 @@
+# Crear usuario en la terminal del ELK useransible con permisos de root
+adduser useransible
+
+# Luego le damos permisos de root
+
+usermod -aG sudo useransible
+
+# Luego habilitar para no escribie el password desde la terminal a la hora de ejecutar un comando son sudo
+visudo
+
+# Agregamos
+%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+
+# Guardamos
+
+# Desde la Azure web en la maquina virtual, no situamos en Conectar ---> Conectar, luego Mas opciones ---> Restablecer contraseñas o claves
+# seleccionamos Reset password
+
+Username: useransible
+Password: elpassworddeuseransible
+Confirm password: elpassworddeuseransible
+
+# Hablitar en el archivo de configuracion del ssh en /etc/ssh/sshd_config, editamos:
+
+PubkeyAuthentication yes
+PasswordAuthentication yes
+
+# Guardamos y reiniciamos el servicio
+systemctl restart sshd
+

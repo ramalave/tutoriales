@@ -1,0 +1,11 @@
+[elastic]
+ELASTIC_VM_IP ansible_port=22 ansible_become=true ansible_user=root ansible_password=password  ansible_become_password=password ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[logstash]
+LOGSTASH_VM_IP ansible_port=22 ansible_become=true ansible_user=root ansible_password=password ansible_become_password=password ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[kibana]
+KIBANA_VM_IP ansible_port=22 ansible_become=true ansible_user=root ansible_password=password ansible_become_password=password ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[curator]
+CURATOR_VM_IP ansible_port=22 ansible_become=true ansible_user=root ansible_password=password  ansible_become_password=password ansible_ssh_common_args='-o StrictHostKeyChecking=no'

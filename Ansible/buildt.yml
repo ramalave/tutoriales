@@ -1,0 +1,11 @@
+---
+- name: Build de Docker en linux
+  hosts: mastert01  # Host Linux de destino
+  vars:
+    image_name: "{{ registry }}:5000/{{ servicio }}:{{ env }}{{ tag }}"  # Nombre de la imagen Docker
+    context_path: "/tmp/{{ dir }}"  # Ruta del contexto del build en el host linux
+  tasks:
+    - name: Build de la imagen Docker
+      shell: |
+        cd "{{ context_path }}"
+        docker build -t "{{ image_name }}" .

@@ -1,0 +1,21 @@
+# Permite setear el servidor NTP del banco a cualquier equipo linux basado en Debian/Ubuntu
+
+# Verificamos estado del demonio que sincroniza el servicio NTP
+
+systemctl status systemd-timesyncd
+
+# Editamos el archivo de configuracion para setearle el servidor NTP de BiBank
+
+nano /etc/systemd/timesyncd.conf
+
+# Descomentamos la linea donde se encuentrs #NTP por
+
+NTP=time.bancointerfinanzas.com.ar
+
+# Guardamos el archivo y reiniciamos el archivo
+
+systemctl restart systemd-timesyncd
+
+# Vemos el estado el servicio que se encuentre en ejecución y que haya sincronizado
+
+timedatectl timesync-status

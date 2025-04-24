@@ -1,0 +1,26 @@
+# Permite agregarle servicio de internet al servicio de docker para descarga de imagenes de docker
+# vamos a:
+
+cd /etc/systemd/system/
+
+# Creamos el directorio de servicio nuevo
+
+mkdir docker.service.d
+
+# Nos dirigimos al nuevo directorio de servcio
+
+cd docker.service.d
+
+# Luego creamos un archivo nuevo, agregando:
+
+nano http-proxy.conf
+
+[Service]
+Environment="http_proxy=http://172.10.20.23:8080/"
+Environment="https_proxy=http://172.10.20.23:8080/"
+Environment="no_proxy=localhost,127.0.0.1,.bancointerfinanzas.com.ar,.bibank.com.ar"
+
+# Reiniciamos todos los demonios en linux y servicio de docker
+
+systemctl daemon-reload
+systemctl restart docker

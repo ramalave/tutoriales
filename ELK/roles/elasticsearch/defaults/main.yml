@@ -1,0 +1,5 @@
+# Path for the config file
+path_config: templates/elasticsearch.yml
+
+# Plugins 
+plugins: []

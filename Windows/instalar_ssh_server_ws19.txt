@@ -1,0 +1,3 @@
+Install OpenSSH Server:
+
+Add-WindowsCapability -Online -Name OpenSSH.Server

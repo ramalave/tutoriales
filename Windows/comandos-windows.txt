@@ -1,0 +1,7 @@
+Visualizar ultimo inicio de Windows por cmd
+systeminfo | find "System Boot Time:"
+
+net statistics workstation
+
+O abrimo el Task Manager en Windows Server y en la seccion de Performance, observamos Up time
+

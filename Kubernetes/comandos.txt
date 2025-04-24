@@ -1,0 +1,57 @@
+=================================================
+  C o m a n d o s   d e   K u b e r n e t e s :
+=================================================
+
+<-- Ver dónde estoy "parado"; qué Cluster ("*" - lo indica).
+Ej.:    kubectl config get-contexts                    
+
+<-- Cambiar al cluster <my-cluster-name>
+Ej.:    kubectl config use-context <my-cluster-name>             
+
+<-- Cambiar al cluster 'BI-AKS-BR-HOMO'
+Ej.:    kubectl config use-context BI-AKS-BR-HOMO
+
+<-- Mostrar todas las implementaciones de todos los espacios de nombres
+Ej.:    kubectl get deployments --all-namespaces=true
+
+<-- Cambiar al namespace <namespace>
+Ej.:    kubectl config set-context --current --namespace=<namespace>
+
+<-- Me paso al namespace de 'kafka'
+Ej.:    kubectl config set-context --current --namespace=kafka
+
+<-- Visualizar los pod que contiene el namespace que estas conectado
+Ej.:    kubectl get pod
+
+<-- Entrar dentro del contenedor de kubernet
+Ej.:    kubectl exec -it api-6fdb6d9864-7266x -- bash
+
+<-- Copiar un archivo desde un contenedor a tu pc
+Ej.:    kubectl cp api-6fdb6d9864-7266x:/tmp/mydump.hprof ./mydump.hpro
+
+<-- Descargar logs de un pod de kubernet vaciandolo en un archivo
+Ej.:    kubectl logs api-7687c7ccb8-2z5fb > logs-api.log
+
+<-- Verificar ip libres en kubernets en un segmento de red
+Ej.:    kubectl run --image=appsoa/docker-alpine-nmap --rm -i -t nm -- -v -sn -n 10.12.118.32/27 -oG -
+
+<-- Mostrar solo las 20 líneas de salida más recientes en pod nginx
+Ej.:    kubectl logs --tail=20 nginx
+  
+<-- Mostrar todos los registros de pod nginx escritos en la última hora
+Ej.:    kubectl logs --since=1h nginx
+
+<-- Proporciona información sobre el uso de recursos por parte de los pods en el clúster
+Ej:     kubectl top pods
+
+<-- Proporciona información detallada sobre un nodo específico, incluyendo la capacidad y el estado actual.
+Ej:     kubectl describe node <nombre-nodo>
+
+<-- Muestra detalles sobre un pod específico, incluyendo los eventos relacionados con él
+Ej:     kubectl describe pod <nombre-pod>
+
+<-- Muestra los eventos que han ocurrido en el clúster, lo que puede ayudar a identificar problemas.
+Ej:     kubectl get events
+
+
+

@@ -1,0 +1,9 @@
+# Convertir certificado .pfx con contraseña a formato .pem con contraseña
+
+$ openssl pkcs12 -in certificate.pfx -out certificate.pem -clcerts
+
+Enter Import Password: contraseña_suministrada
+Enter PEM pass phrase: contraseña_suministrada
+Verifying - Enter PEM pass phrase: contraseña_suministrada
+
+ls -l certificate.pem

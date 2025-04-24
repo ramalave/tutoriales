@@ -1,0 +1,47 @@
+Buenas noches estimados,
+han sido liberados los artefactos correspondientes al Release de la versión 1.19.0-27122023
+
+La bitácora de la entrega se adjunta en el presente correo y también se encuentra en:
+https://technisys.atlassian.net/l/cp/0Z1uCYZf
+
+Se han depositado las imágenes docker y los charts de helm en el ACR de BiBank así como la aplicación móvil se ha disponibilizado a través del appcenter.
+
+Los archivos de configuración de despliegue han sido publicados en:
+https://bitbucket.org/technisys/ar-bib-cyberbank-gitops
+
+A continuación detallo los artefactos actualizados:
+
+i18n:
+image: acrbidigital.azurecr.io/techbank/i18n:2.4.5-20231229.3-034ad5cf
+chart: i18n-1.3.0-034ad5cf
+api:
+image: acrbidigital.azurecr.io/digital/api:1.0.0-20231229.8-f7d65a278
+chart: api-1.1.3
+backoffice:
+image: acrbidigital.azurecr.io/digital/backoffice:1.0.0-20231229.6-511851bcc
+image-boapi: acrbidigital.azurecr.io/digital/backoffice-api:1.0.0-20231229.6-511851bcc
+chart: backoffice-2.1.0
+web:
+image: acrbidigital.azurecr.io/techbank/web:1.19.0-20231229.3-034ad5c
+chart: web-1.0.4-034ad5c
+
+
+
+La aplicación móvil para el ambiente de test se encuentra disponible en:
+Android
+https://appcenter.ms/orgs/BiBank/apps/Mobile-Android-BiBank/distribute/releases
+iOS
+https://appcenter.ms/orgs/BiBank/apps/Mobile-iOS-BiBank/distribute/releases
+
+La aplicación móvil para el ambiente de homologación se encuentra disponible en:
+
+https://appcenter.ms/orgs/BiBank/apps/Mobile-Android-BiBank-Homo/distribute/releases
+
+La aplicación móvil para el ambiente de producción se encuentra disponible en:
+
+https://appcenter.ms/orgs/BiBank/apps/Mobile-Android-BiBank-Prod/distribute/releases
+
+Todas las apps de android están listas para que puedan hacer la subida a la play store.
+
+Quedo atento a sus comentarios.
+Saludos cordiales.

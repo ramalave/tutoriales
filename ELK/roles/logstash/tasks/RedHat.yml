@@ -1,0 +1,71 @@
+---
+# Tasks for installing Logstash for CentOS host
+
+## Tasks for include de package logstash in the yum respos directory
+- name: Add elastic repo
+  yum_repository:
+    name: elastic-7.x
+    description: Elastic repository for 7.x packages
+    baseurl: https://artifacts.elastic.co/packages/7.x/yum
+    gpgcheck: yes
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+# Install
+- name:  Installing last version Logstash
+  yum:
+    name: logstash
+    state: latest
+
+# Configure the service with a default file or use one that de user provided in path_config
+- name: Configuring Logstash
+  template:
+    src: "{{ path_config }}"
+    dest: /etc/logstash/logstash.yml
+    owner: root
+    group: root
+    mode: 0644
+
+- set_fact:
+    path_pipelines_config: "{{ path_pipelines_config }}"
+
+# Put pipelines define files in the folder of pipeline configurations
+- name: Configuring Pipelines
+  template:
+    src: "{{ item.path }}"
+    dest: /etc/logstash/conf.d/{{item.name}}.conf
+    owner: root
+    group: root
+    mode: 0644
+  with_items: "{{ pipelines }}"
+  when: path_pipelines_config == ''
+
+# Define all the pipelines.yml
+- name: Configuring pipelines.yml with config file
+  template:
+    src: "{{ path_pipelines_config }}"
+    dest: /etc/logstash/pipelines.yml
+    owner: root
+    group: root
+    mode: 0644
+  when: path_pipelines_config != ''
+
+- name: Configuring pipelines.yml with list
+  blockinfile:
+    path: /etc/logstash/pipelines.yml
+    marker: ""
+    backup: yes
+    create: yes
+    block: |
+        - pipeline.id: {{ item.name }}
+          path.config: /etc/logstash/conf.d/{{item.name}}.conf
+    insertafter: "EOF"
+  with_items: "{{ pipelines }}"
+  when: path_pipelines_config == ''
+
+# Configure Logstash with systemd
+- name: Service Logstash enabled, unmasked, started 
+  systemd:
+    name: logstash
+    enabled: yes
+    masked: no
+    state: started

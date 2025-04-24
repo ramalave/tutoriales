@@ -1,0 +1,5 @@
+- hosts: elastic
+  become: true
+  gather_facts: true
+  roles:
+    - { role: elasticsearch}

@@ -1,0 +1,12 @@
+Comprobar el identificador del disco
+ls /sys/class/scsi_disk/
+
+Escanear el disco
+echo 1 > /sys/class/scsi_device/1:0:0:0/device/rescan
+
+Formato de bajo nivel
+dd if=/dev/zero of=/dev/sdb bs=1M count=1
+dd if=/dev/zero of=/dev/sdb
+
+Chequeo de disco
+fsck /dev/sdb

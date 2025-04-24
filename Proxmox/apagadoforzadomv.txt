@@ -1,0 +1,9 @@
+Identificamos el proceso de la maquina virtual que está corriendo que es imposible detener con el numero del equipo al final del comando a continuación: 
+
+ps aux | grep "/usr/bin/kvm -id 105"
+
+Matamos la ejecución del equipo con el número de proceso:
+
+kill -9 35325
+
+De esta forma podemos detener un equipo que sufre falla por perdida de un componente que impide su detención

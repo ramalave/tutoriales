@@ -1,0 +1,18 @@
+---
+- name: Crear & Copiar directorio en Linux
+  hosts: mastert01
+  become: yes
+  tasks:
+    - name: Creando directorio en el destino
+      file:
+        path: "/tmp/{{ dir }}/"
+        state: directory  # Indica que se debe crear un directorio
+        mode: "0755"
+
+    - name: Copiar archivos al host Linux usando rsync
+      synchronize:
+        src: "{{ src }}/"
+        dest: "/tmp/{{ dir }}/"
+        rsync_opts:
+          - "--chmod=0755"  # Permisos para los directorios
+          - "--omit-dir-times"  # Ignora tiempos de modificación para reducir la carga

@@ -1,0 +1,72 @@
+Pongo el ssh
+ssh-keygen -t ed25519 -C 'AUTH'
+
+export GIT_SSL_NO_VERIFY=1
+
+git clone https://gitlab.bibank.com.ar/rmalave/tutoriales-bibank.git
+
+
+apt install ansible
+
+ansible-galaxy install -p /home/nciancio/tutoriales-bibank/ELK/roles geerlingguy.java
+
+
+apt-get install sshpass
+
+Crear usuario useransible
+Habilitar PasswordAuthentication
+
+ansible-playbook -i/ELK/inventory.yml/ELK/mainElastic.yml
+ Copiar pass de output
+
+Cambiar pass en kibana.yml y logstash.yml
+ansible-playbook -i/ELK/inventory.yml/ELK/mainLogstash.yml
+
+ansible-playbook -i/ELK/inventory.yml/ELK/mainKibana.yml
+cp pipelines-logstash/basic.conf /etc/logstash/conf.d
+
+
+
+https://www.elastic.co/guide/en/beats/heartbeat/current/running-with-systemd.html
+
+sudo apt install python3-pip
+
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+
+Add one of the following in your /etc/apt/sources.list.d/ directory in a file with a .list suffix, for example curator.list
+
+deb [arch=amd64] https://packages.elastic.co/curator/5/debian stable main
+
+sudo apt-get update
+
+sudo apt-get update && sudo apt-get install elasticsearch-curator
+
+ln -sf /opt/elasticsearch-curator/curator /usr/bin/curator
+
+mkdir /etc/curator
+
+touch curator.yml 
+
+curator --config ./curator.yml delete_indices.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

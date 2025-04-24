@@ -1,0 +1,10 @@
+---
+- name: Push de Docker en linux
+  hosts: mastert01  # Host linux de destino
+  vars:
+    image_name: "{{ registry }}:5000/{{ servicio }}:{{ env }}{{ tag }}"  # Nombre de la imagen Docker
+  tasks:
+    - name: Push de la imagen Docker
+      command: >
+        docker push "{{ image_name }}"
+      register: docker_push_result

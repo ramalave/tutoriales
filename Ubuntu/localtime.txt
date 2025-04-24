@@ -1,0 +1,2 @@
+# Configurar zona o region en linux
+dpkg-reconfigure tzdata

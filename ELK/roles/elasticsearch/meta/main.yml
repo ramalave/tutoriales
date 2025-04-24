@@ -1,0 +1,11 @@
+---
+dependencies:
+  - role: geerlingguy.java
+    vars:
+      java_packages: java-1.8.0-openjdk
+    when: "ansible_os_family == 'RedHat'"
+  - role: geerlingguy.java
+    vars:
+      java_packages: openjdk-8-jdk
+    when: "ansible_os_family == 'Debian'"
+...

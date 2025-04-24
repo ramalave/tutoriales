@@ -1,0 +1,11 @@
+[elastic]
+10.12.20.5 ansible_port=22 ansible_become=true ansible_user=useransible ansible_password=3r7Tni6g7H0k  ansible_become_password=3r7Tni6g7H0k ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[logstash]
+10.12.20.5 ansible_port=22 ansible_become=true ansible_user=useransible ansible_password=3r7Tni6g7H0k ansible_become_password=3r7Tni6g7H0k ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[kibana]
+10.12.20.5 ansible_port=22 ansible_become=true ansible_user=useransible ansible_password=3r7Tni6g7H0k ansible_become_password=3r7Tni6g7H0k ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[curator]
+10.12.20.5 ansible_port=22 ansible_become=true ansible_user=useransible ansible_password=3r7Tni6g7H0k  ansible_become_password=3r7Tni6g7H0k ansible_ssh_common_args='-o StrictHostKeyChecking=no'

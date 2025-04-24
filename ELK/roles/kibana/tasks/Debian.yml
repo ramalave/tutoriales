@@ -1,0 +1,36 @@
+---
+# Tasks for installing Kibana for Debian host based
+## Tasks for include de package kibana in the yum respos directory
+- name: Import elastic GPG key
+  apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    state: present
+
+- name: Add elastic repo
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+## Install
+- name: Installing last version Kibana
+  apt:
+    name: kibana
+    update_cache: yes
+
+## Configure the service with a default file or use one that de user provided in path_config
+- name: Configuring Kibana
+  template:
+    src: "{{ path_config }}"
+    dest: /etc/kibana/kibana.yml
+    owner: root
+    group: root
+    mode: 0644
+
+## Configure de the service with systemd
+- name: Service Kibana enabled, unmasked, started
+  systemd: 
+    name: kibana
+    enabled: yes
+    masked: no
+    state: started
+...

@@ -1,0 +1,17 @@
+# Insertar configuración del proxy del banco a cualquier equipo basado en linux, preferentemente distribuciones basadas en Debian, Ubuntu
+
+nano /etc/environment
+
+Agregar al final:
+
+http_proxy="http://172.10.20.23:8080/"
+https_proxy="http://172.10.20.23:8080/"
+no_proxy="localhost,127.0.0.1,.ramalave.com.ar,.ramalave.ar"
+
+# Azure Estados Unidos
+
+http_proxy="http://172.10.21.23:8080/"
+https_proxy="http://172.10.21.23:8080/"
+no_proxy="localhost,127.0.0.1,.ramalave.com.ar,.ramalave.ar"
+
+Guardamos y cerramos el editor, luego desloguearse y volver iniciar sesión, debería ya tener acceso a internet

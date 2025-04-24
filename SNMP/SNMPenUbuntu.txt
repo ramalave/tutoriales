@@ -1,0 +1,15 @@
+apt install snmpd
+
+nano /etc/snmp/snmpd.conf
+
+# Revisemos que este descomentado la linea
+
+#agentAddress udp:127.0.0.1:161
+por
+agentAddress udp:127.0.0.1:161
+
+Guardamos y reiniciamos el servicio:
+
+systemctl restart snmpd
+
+systemctl status snmpd
