@@ -1,9 +1,19 @@
 # Subir cambios del repositorio local al repositorio de gitlab
-git config --global user.name "usrgitlab"
-git config --global user.email "usrgitlab@bancointerfinanzas.com.ar"
+git config --global user.name "ramalave"
+git config --global user.email "ramalave@ramalave.com.ar"
 git init
 git status
 git add .
 git commit -m "Comentario del commit a subir"
 git push
 git tag -a v1.4 -m 'mi version 1.4'
+
+
+# Primer commit GitHub
+git init
+git add .
+git config --global user.name "Rafael Malavé"
+git config --global user.email "ramalave@ramalave.com.ar"
+git commit -m "first commit"
+git remote add origin https://github.com/NOMBRE_USUARIO/NOMBRE_PROYECTO.git
+git push -u origin master
