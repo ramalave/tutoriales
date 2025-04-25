@@ -1,0 +1,5 @@
+# Si te aparece al iniciar sesion en tu Ubuntu este mensaje:
+# 2 devices have a firmware upgrade available.
+# Run `fwupdmgr get-upgrades` for more information.
+# Para actualizarlo ejecuta el siguiente comando como root
+fwupdmgr update
