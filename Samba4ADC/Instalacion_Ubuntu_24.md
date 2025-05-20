@@ -27,10 +27,10 @@ También necesitaremos modificar el archivo hosts, agregar la siguiente línea a
 /etc/hosts
 ```
 
-### Configure FQDN adc.e-buyplace.com.ar
+### Configure FQDN adc.ramalave.ar
 
 ```console
-10.20.20.30 adc.e-buyplace.com.ar dc1
+172.28.25.55 adc.ramalave.ar adc
 ```
 
 ### Verificar nombre de host
@@ -41,7 +41,7 @@ Puedes verificar rápidamente que todo funcionó con el siguiente comando
 hostname -f
  
 # Verificando FQDN si resuelve a la dirección IP de Samba
-ping -c3 adc.e-buyplace.com.ar
+ping -c3 adc.ramalave.ar
 ```
 
 ## Deshabilitar el solucionador de DNS
@@ -64,13 +64,13 @@ touch /etc/resolv.conf
 ### Introduzca lo siguiente en /etc/resolv.conf
 ```console
 # Servidor Samba dirección IP
-nameserver 10.20.20.30
+nameserver 172.28.25.55
  
 # DNS fallback o secundario
 nameserver 1.1.1.1
  
 # Servidor principal de samba
-search e-buyplace.com.ar
+search ramalave.ar
 ```
 
 ### Hace que el archivo no se sobreescriba
@@ -90,13 +90,13 @@ sudo apt install -y acl attr samba samba-dsdb-modules samba-vfs-modules smbclien
 ### Ingrese la información apropiada
 ```console
 # Default Kerberos Version 5 Realm:
-E-BUYPLACE.COM.AR
+ramalave.ar
  
 # Kerberos Servers for your realm:
-e-buyplace.com.ar
+ramalave.ar
  
 # Administrative server for your Kerberos realm:
-acd.e-buyplace.com.ar
+acd.ramalave.ar
 ```
 
 ## Desactivando servicios de Samba
@@ -167,7 +167,7 @@ sudo chmod 750 /var/lib/samba/ntp_signd/
 Agregue lo siguiente a /etc/chrony/chrony.conf
 ```console
 # Vincular el servicio chrony a la dirección IP del AD Samba
-bindcmdaddress 10.20.20.30
+bindcmdaddress 172.28.25.55
  
 # Permitir que los clientes de la red se conecten al servidor NTP de Chrony
 allow 10.20.20.0/24
@@ -188,35 +188,35 @@ sudo systemctl status chronyd
 ## Verificación de Samba Active Directory
 ### Ejecute lo siguiente para verificar
 ```console
-# Verificando el dominio e-buyplace.com.ar
-host -t A e-buyplace.com.ar
+# Verificando el dominio ramalave.ar
+host -t A ramalave.ar
  
-# Verficiando el subdominio adc.e-buyplace.com.ar
-host -t A .adc.e-buyplace.com.ar
+# Verficiando el subdominio adc.ramalave.ar
+host -t A .adc.ramalave.ar
 ```
 
 ## Luego verifique los servicios Kerberos y ldap
 ```console
 # Verificar el registro SRV para _kerberos
-host -t SRV _kerberos._udp.e-buyplace.com.ar
+host -t SRV _kerberos._udp.ramalave.ar
  
 # Verificar registro SRV para _ldap
-host -t SRV _ldap._tcp.e-buyplace.com.ar
+host -t SRV _ldap._tcp.ramalave.ar
 ```
 
 ## Luego verifique los recursos de Samba
 ```console
 # Verificar registro SRV para _kerberos
-host -t SRV _kerberos._udp.e-buyplace.com.ar
+host -t SRV _kerberos._udp.ramalave.ar
  
 # Verificar el registro SRV para _ldap
-host -t SRV _ldap._tcp.e-buyplace.com.ar
+host -t SRV _ldap._tcp.ramalave.ar
 ```
 
 ## Último KINIT
 ```console
 # Autenticarse en Kerberos mediante el administrador (DEBE ESTAR EN MAYÚSCULAS)
-kinit administrator@E-BUYPLACE.COM.AR
+kinit administrator@RAMALAVE.AR
  
 # Verificar la lista de tickets Kerberos almacenados en caché
 klist
@@ -243,18 +243,18 @@ Comprobación previa
 # En Powershell
 Get-DnsClientServerAddress
  
-# ping the AD domain adc.e-buyplace.com.ar
-ping adc.e-buyplace.com.ar
+# ping the AD domain adc.ramalave.ar
+ping adc.ramalave.ar
  
-# ping the AD domain e-buyplace.com.ar
-ping e-buyplace.com.ar
+# ping the AD domain ramalave.ar
+ping ramalave.ar
 ```
 
 ## Agregar servidor al ADC
 ```powershell
 # En Powershell
 # Agregar Windows 10/11 en el Active Directory usando POWERSHELL
-Add-Computer -DomainName "e-buyplace.com.ar" -Restart
+Add-Computer -DomainName "ramalave.ar" -Restart
 ```
 
 After restart login as domain user
@@ -276,7 +276,7 @@ sudo apt update
 
 ## Establecer nombre de host
 ```console
-sudo hostnamectl set-hostname arpc01.e-buyplace.com.ar
+sudo hostnamectl set-hostname neo.ramalave.ar
 ```
 
 ## Modifique la info de su Resolv
@@ -286,7 +286,7 @@ nano /etc/systemd/resolved.conf
  
 #Agrega lo siguiente
 [Resolve]
-DNS=10.20.20.30 1.1.1.1 8.8.8.8
+DNS=172.28.25.55 1.1.1.1 8.8.8.8
  
 sudo systemctl restart systemd-resolved
 ```
@@ -299,12 +299,12 @@ sudo apt -y install realmd libnss-sss libpam-sss sssd sssd-tools adcli samba-com
 
 ## Descubra el dominio (Opcional)
 ```console
-sudo realm discover e-buyplace.com.ar
+sudo realm discover ramalave.ar
 ```
 
 ## Únete al dominio
 ```console
-sudo realm join -U Administrator e-buyplace.com.ar
+sudo realm join -U Administrator ramalave.ar
 ```
 
 Reinicie y podrá iniciar sesión como usuario del dominio.
