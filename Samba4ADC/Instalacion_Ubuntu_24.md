@@ -170,7 +170,7 @@ Agregue lo siguiente a /etc/chrony/chrony.conf
 bindcmdaddress 172.28.25.55
  
 # Permitir que los clientes de la red se conecten al servidor NTP de Chrony
-allow 10.20.20.0/24
+allow 172.28.25.0/24
  
 # Permitir que los clientes de la red se conecten al servidor NTP de Chrony
 ntpsigndsocket /var/lib/samba/ntp_signd
